@@ -15,5 +15,6 @@ class Student {
     this.grade = grade;
   }
 }
+console.log(new Student("Bob", 25, "A"));
 
 export {};
