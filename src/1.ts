@@ -1,8 +1,12 @@
-/*
-  Клас Student, який містить три властивості: name, age та grade. 
-  Замість того, щоб оголошувати ці властивості в тілі класу, потім у конструкторі, і нарешті надавати їм значення, 
-  напишіть скорочену ініціалізацію.
-*/
+class Student {
+  constructor(public name: string, public age: number, public grade: string) {}
+}
+console.log(new Student("Bob", 25, "A"));
+
+export { Student };
+
+/*  Клас Student, який містить три властивості: name, age та grade. 
+  Замість того, щоб оголошувати ці властивості в тілі класу, потім у конструкторі, і нарешті надавати їм значення, напишіть скорочену ініціалізацію.
 
 class Student {
   public name: string;
@@ -15,6 +19,4 @@ class Student {
     this.grade = grade;
   }
 }
-console.log(new Student("Bob", 25, "A"));
-
-export {};
+*/
