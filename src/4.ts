@@ -58,29 +58,29 @@ class MyHouse extends House {
 }
 
 // Coming home scenario:
-// Creating a key
-const key = new Key();
-console.log(key.getSignature());
+const validKey = new Key();
+console.log(validKey.getSignature());
+const wrongKey = new Key();
+console.log(wrongKey.getSignature());
 
-// Creating a house
-const house = new MyHouse(key);
+const houseSafe = new MyHouse(validKey);
+const houseAlarm = new MyHouse(wrongKey);
 
-// Creating a person
-const person = new Person(key);
+const person = new Person(validKey);
 
 // Opening the door with the correct key
-house.openDoor(key);
+houseSafe.openDoor(validKey);
 
 // Person tries to enter using the wrong key
 try {
-  house.openDoor(new Key()); // Wrong key, door remains closed
+  houseAlarm.openDoor(new Key()); // Door remains closed, alarm is on
 } catch (error) {
   console.log("Person tried to enter with the wrong key");
   console.error(error);
 }
 
-// Now the person finds the correct key and enters the house
-house.comeIn(person);
+// Now the person with the valid key enters the house safely, alarm is off
+houseSafe.comeIn(person);
 
 export { Key, Person, House, MyHouse };
 
