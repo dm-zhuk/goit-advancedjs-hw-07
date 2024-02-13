@@ -33,10 +33,10 @@ abstract class House {
 
   comeIn(person: Person): void {
     if (!this.door) {
-      console.log("The door is closed. The person cannot come in.");
+      console.log("The door is closed. The person cannot enter");
     } else {
       this.tenants.push(person);
-      console.log("The person came into the house.");
+      console.log("The person entered the house");
     }
   }
   abstract openDoor(key: Key): void;
@@ -47,21 +47,39 @@ class MyHouse extends House {
     super(key);
   }
 
-  openDoor(key: Key): void {
-    if (!key.getSignature()) {
-      throw new Error("Wrong key, door is closed");
-    } else {
+  openDoor(key: Key) {
+    if (key.getSignature() === this.key.getSignature()) {
       this.door = true;
-      console.log("The door is open");
+      console.log("Door opened");
+    } else {
+      throw new Error("Wrong key. Door remains closed");
     }
   }
 }
 
+// Coming home scenario:
+// Creating a key
 const key = new Key();
+console.log(key.getSignature());
+
+// Creating a house
 const house = new MyHouse(key);
+
+// Creating a person
 const person = new Person(key);
 
-house.openDoor(person.getKey());
+// Opening the door with the correct key
+house.openDoor(key);
+
+// Person tries to enter using the wrong key
+try {
+  house.openDoor(new Key()); // Wrong key, door remains closed
+} catch (error) {
+  console.log("Person tried to enter with the wrong key");
+  console.error(error);
+}
+
+// Now the person finds the correct key and enters the house
 house.comeIn(person);
 
 export { Key, Person, House, MyHouse };
